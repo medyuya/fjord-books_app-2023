@@ -200,8 +200,13 @@ ja:
       new:
         title: 本の作成
         link_text: 本を作成
+      create:
+        success_message: 本を作成しました
       edit:
         title: 本の編集
         link_text: 本を編集する
+      update:
+        success_message: 編集をしました
       destroy:
         btn_text: この本を削除
+        success_message: 削除をしました

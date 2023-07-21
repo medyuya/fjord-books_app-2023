@@ -234,8 +234,13 @@ en:
       new:
         title: New Book
         link_text: New book
+      create:
+        success_message: Book was successfully created.
       edit:
         title: Edit Book
         link_text: Edit this book
+      update:
+        success_message: Book was successfully updated.
       destroy:
         btn_text: Destroy this book
+        success_message: Book was successfully destroyed.
