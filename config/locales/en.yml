@@ -7,6 +7,12 @@ en:
         restrict_dependent_destroy:
           has_one: Cannot delete record because a dependent %{record} exists
           has_many: Cannot delete record because dependent %{record} exist
+    attributes:
+      book:
+        title: Title
+        memo: Memo
+        author: Author
+        picture: Picture
   date:
     abbr_day_names:
     - Sun
@@ -213,3 +219,23 @@ en:
       long: "%B %d, %Y %H:%M"
       short: "%d %b %H:%M"
     pm: pm
+  views:
+    books:
+      labels:
+        title: Title
+        memo: Memo
+        author: Author
+        picture: Picture
+      index:
+        title: Books
+        link_text: Back to books
+      show:
+        link_text: Show this book
+      new:
+        title: New Book
+        link_text: New book
+      edit:
+        title: Edit Book
+        link_text: Edit this book
+      destroy:
+        btn_text: Destroy this book
