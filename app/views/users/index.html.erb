@@ -1,0 +1,10 @@
+<div>
+  <% @users.each do |user| %>
+    <div>
+      <%= user.email %>
+      <%= user.profile %>
+      <%= user.address %>
+      <%= user.post_code %>
+    </div>
+  <% end %>
+</div>

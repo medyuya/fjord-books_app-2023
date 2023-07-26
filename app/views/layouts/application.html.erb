@@ -12,6 +12,8 @@
 
   <% if user_signed_in? %>
     <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+    <%= link_to "ユーザー一覧", users_path %>
+    <%= link_to "プロフィール", user_path(current_user) %>
   <% end %>
 
   <body class="<%= params[:action] %>">
