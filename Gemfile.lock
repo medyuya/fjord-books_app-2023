@@ -111,6 +111,7 @@ GEM
       warden (~> 1.2.3)
     devise-i18n (1.11.0)
       devise (>= 4.9.0)
+    dotenv (2.8.1)
     erb_lint (0.3.1)
       activesupport
       better_html (>= 2.0.1)
@@ -310,6 +311,7 @@ DEPENDENCIES
   debug
   devise
   devise-i18n
+  dotenv
   erb_lint
   faker
   i18n_generators
