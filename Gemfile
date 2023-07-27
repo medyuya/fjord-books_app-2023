@@ -46,8 +46,8 @@ gem 'bootsnap', require: false
 
 gem 'devise'
 gem 'devise-i18n'
-gem 'pry-rails'
 gem 'dotenv'
+gem 'pry-rails'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
@@ -73,9 +73,9 @@ group :development do
   gem 'erb_lint', require: false
   gem 'faker'
   gem 'i18n_generators'
+  gem 'letter_opener_web'
   gem 'rubocop-fjord', require: false
   gem 'rubocop-rails', require: false
-  gem 'letter_opener_web'
 end
 
 group :test do
