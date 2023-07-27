@@ -189,11 +189,30 @@ ja:
       new: "%{name}の新規作成"
       back: "%{name}の一覧に戻る"
       delete_confirm: よろしいですか？
+      profile: "プロフィール"
       title_index: "%{name}の一覧"
       title_new: "%{name}の新規作成"
       title_edit: "%{name}の編集"
       error: エラー
       validation_error: "%{errors}があるため、この%{name}は保存できませんでした"
+    users:
+      resend_mail: メールを再送信
+      change_password: パスワード変更
+      forget_password: パスワードを忘れた場合
+      current_waiting_confirmation: 確認待ちのメールアドレス
+      registration: 新規登録
+      login: ログイン
+      update: ユーザー情報の更新
+      logout: ログアウト
+      min_password_length: 最低文字数
+      delete: アカウントの削除
+      no_change_password: 変更しない場合、入力しない
+      current_password_input: 現在のパスワードを入力
+      delete_confirm: 本当にアカウントを削除しますか？
+      no_receive_confirmation: 確認の指示を受け取っていない場合
+      send_email: メールを送る
+      input_completion: 完了
+      back: 戻る
     pagination:
       first: '« 最初'
       last: '最後 »'
