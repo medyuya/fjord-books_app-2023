@@ -222,6 +222,8 @@ ja:
       current_password_input: 現在のパスワードを入力
       delete_confirm: 本当にアカウントを削除しますか？
       no_receive_confirmation: 確認の指示を受け取っていない場合
+      new_password: 新しいパスワード
+      confirm_new_password: 確認のためのパスワード
       send_email: メールを送る
       input_completion: 完了
       back: 戻る
