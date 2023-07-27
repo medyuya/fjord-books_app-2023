@@ -195,6 +195,18 @@ ja:
       title_edit: "%{name}の編集"
       error: エラー
       validation_error: "%{errors}があるため、この%{name}は保存できませんでした"
+    email:
+      welcome: ようこそ
+      hello: こんにちは
+      confirm_my_account: アカウントを確認する
+      change_my_password: パスワードを変更する
+      confirmation_instruction: 以下のリンクからアカウントのメールアドレスを確認できます
+      is_being_change_email: メールアドレスが次のように変更されることをお知らせするためにご連絡しています。
+      has_been_change_email: メールアドレスが次のように変更されたことをお知らせするためにご連絡しています。
+      password_change_instruction: パスワードが変更されたことをお知らせするためにご連絡させていただきました。
+      reset_password_instruction: 誰かがあなたのパスワードを変更するためのリンクをリクエストしました。以下のリンクからこれを行うことができます
+      request_ignore_instruction: リクエストしていない場合は、このメールを無視してください。
+      no_password_change_instruction: 上のリンクにアクセスして新しいパスワードを作成するまで、パスワードは変更されません。
     users:
       resend_mail: メールを再送信
       change_password: パスワード変更
