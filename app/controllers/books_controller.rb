@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class BooksController < ApplicationController
-  before_action :authenticate_user!, only: %i[index show new edit create update destroy]
   before_action :set_book, only: %i[show edit update destroy]
 
   # GET /books or /books.json
