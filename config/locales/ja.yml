@@ -189,6 +189,7 @@ ja:
       new: "%{name}の新規作成"
       back: "%{name}の一覧に戻る"
       delete_confirm: よろしいですか？
+      profile_edit: "プロフィール編集"
       profile: "プロフィール"
       title_index: "%{name}の一覧"
       title_new: "%{name}の新規作成"
