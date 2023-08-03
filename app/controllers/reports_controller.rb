@@ -1,5 +1,5 @@
 class ReportsController < ApplicationController
-  before_action :set_report, only: %i[show edit update]
+  before_action :set_report, only: %i[show edit update destroy]
 
   def index
     @reports = Report.all
@@ -32,6 +32,9 @@ class ReportsController < ApplicationController
   end
 
   def destroy
+    @report.destroy
+
+    redirect_to reports_url, notice: t('controllers.common.notice_destroy', name: Report.model_name.human)
   end
 
   private
