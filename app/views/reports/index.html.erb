@@ -1,2 +1,3 @@
-<h1>Reports#index</h1>
-<p>Find me in app/views/reports/index.html.erb</p>
+<nav class="page-nav">
+  <%= link_to t('views.common.new', name: Report.model_name.human.downcase), new_report_path %>
+</nav>
