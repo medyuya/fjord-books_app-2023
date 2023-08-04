@@ -5,6 +5,9 @@
         <%= comment.user.name %>
         <%= comment.content %>
         <%= l comment.created_at, format: :short %>
+        <% if comment.user == current_user %>
+          <%= button_to '削除', polymorphic_path([comment.commentable, comment]), { method: :delete, form: { data: { turbo_confirm: "本当に削除しますか？" } } } %>
+        <% end %>
       </div>
     <% end %>
   <% else %>
