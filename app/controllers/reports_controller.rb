@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReportsController < ApplicationController
   before_action :set_report, only: %i[show edit update destroy]
   before_action :correct_user, only: %i[edit update destroy]
@@ -53,9 +55,9 @@ class ReportsController < ApplicationController
 
   def correct_user
     @report = Report.find(params[:id])
-    unless @report.user == current_user
-      flash[:notice] = "このユーザーには権限がありません。"
-      redirect_to reports_url
-    end
+    return if @report.user == current_user
+
+    flash[:notice] = 'このユーザーには権限がありません。'
+    redirect_to reports_url
   end
 end
