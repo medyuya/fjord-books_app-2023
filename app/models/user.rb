@@ -11,6 +11,6 @@ class User < ApplicationRecord
   end
 
   def name_or_email
-    (name.presence || email)
+    name || email
   end
 end
