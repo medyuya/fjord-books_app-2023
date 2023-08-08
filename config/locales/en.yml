@@ -7,6 +7,8 @@ en:
         restrict_dependent_destroy:
           has_one: Cannot delete record because a dependent %{record} exists
           has_many: Cannot delete record because dependent %{record} exist
+    models:
+      book: Book
     attributes:
       book:
         title: Title
@@ -227,20 +229,20 @@ en:
         author: Author
         picture: Picture
       index:
-        title: Books
-        link_text: Back to books
+        title: "%{name}s"
+        link_text: "Back to %{name}s"
       show:
-        link_text: Show this book
+        link_text: "Show this %{name}"
       new:
-        title: New Book
-        link_text: New book
+        title: "New %{name}"
+        link_text: "New %{name}"
       create:
-        success_message: Book was successfully created.
+        success_message: "%{name} was successfully created."
       edit:
-        title: Edit Book
-        link_text: Edit this book
+        title: "Edit %{name}"
+        link_text: "Edit this %{name}"
       update:
-        success_message: Book was successfully updated.
+        success_message: "%{name} was successfully updated."
       destroy:
-        btn_text: Destroy this book
-        success_message: Book was successfully destroyed.
+        btn_text: "Destroy this %{name}"
+        success_message: "%{name} was successfully destroyed."

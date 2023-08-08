@@ -7,6 +7,8 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+    models:
+      book: 本
     attributes:
       book:
         title: タイトル
@@ -193,20 +195,20 @@ ja:
         author: 著者
         picture: 画像
       index:
-        title: 本の一覧
-        link_text: 本の一覧に戻る
+        title: "%{name}の一覧"
+        link_text: "%{name}の一覧を見る"
       show:
-        link_text: この本を表示
+        link_text: "この%{name}を表示"
       new:
-        title: 本の作成
-        link_text: 本を作成
+        title: "%{name}の作成"
+        link_text: "%{name}を作成"
       create:
-        success_message: 本を作成しました
+        success_message: "%{name}を作成しました"
       edit:
-        title: 本の編集
-        link_text: 本を編集する
+        title: "%{name}の編集"
+        link_text: "%{name}を編集する"
       update:
-        success_message: 編集をしました
+        success_message: "%{name}を編集をしました"
       destroy:
-        btn_text: この本を削除
-        success_message: 削除をしました
+        btn_text: "この%{name}を削除"
+        success_message: "%{name}を削除しました"
