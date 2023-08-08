@@ -14,4 +14,10 @@ class Report < ApplicationRecord
   def created_on
     created_at.to_date
   end
+
+  def link_detect_and_save
+    urls = self.content.scan(/http:\/\/localhost:3000\/reports\/\d+\b/)
+    extracted_report_ids = urls.map { |url| url.sub("http://localhost:3000/reports/", "").to_i }
+    false
+  end
 end
