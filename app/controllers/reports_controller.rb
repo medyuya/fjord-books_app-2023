@@ -23,31 +23,31 @@ class ReportsController < ApplicationController
 
     ActiveRecord::Base.transaction do
       if @report.save
-        if @report.link_detect_and_save
-          redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
-        else
-          raise ActiveRecord::Rollback
-          render :new, status: :unprocessable_entity
-        end
+        raise ActiveRecord::Rollback unless @report.link_detect_and_save
+
+        redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
+
       else
         render :new, status: :unprocessable_entity
       end
     end
+
+    render :new, status: :unprocessable_entity
   end
 
   def update
     ActiveRecord::Base.transaction do
       if @report.update(report_params)
-        if @report.link_detect_and_update
-          redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
-        else
-          raise ActiveRecord::Rollback
-          render :edit, status: :unprocessable_entity
-        end
+        raise ActiveRecord::Rollback unless @report.link_detect_and_update
+
+        redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
+
       else
         render :edit, status: :unprocessable_entity
       end
     end
+
+    render :edit, status: :unprocessable_entity
   end
 
   def destroy
