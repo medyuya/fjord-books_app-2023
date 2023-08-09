@@ -22,8 +22,8 @@ class ReportsController < ApplicationController
     @report = current_user.reports.new(report_params)
 
     ActiveRecord::Base.transaction do
-      if @report.link_detect_and_save
-        if @report.save
+      if @report.save
+        if @report.link_detect_and_save
           redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
         else
           raise ActiveRecord::Rollback
