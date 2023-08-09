@@ -36,8 +36,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
           end
         set_flash_message :notice, flash_key
       end
-      sign_in resource_name, resource, :bypass_sign_in => true
-      respond_with resource, :location => after_update_path_for(resource)
+      sign_in resource_name, resource, bypass_sign_in: true
+      respond_with resource, location: after_update_path_for(resource)
     else
       clean_up_passwords resource
       respond_with resource
@@ -60,14 +60,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  def after_update_path_for(resource)
+  def after_update_path_for(_resource)
     user_path(current_user)
   end
 
   def update_resource(resource, params)
     resource.update_without_current_password(params)
-    if @user.present?
-    end
   end
 
   # If you have extra params to permit, append them to the sanitizer.
