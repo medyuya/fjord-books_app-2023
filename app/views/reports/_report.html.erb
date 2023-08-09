@@ -19,7 +19,7 @@
     <%= l report.created_on %>
   </p>
 
-  <h3>この記事は以下の記事からリンクされています</h3>
+  <h3><%= t('views.common.mentioned_links') %></h3>
 
   <% report.mentioned_reports.each do |report| %>
     <div>
@@ -27,7 +27,7 @@
         <br>
         <%= image_tag report.user.avatar.variant(:thumb) %>
       <% end %>
-      <%= link_to report.title, report_path(report) %>からリンク
+      <%= link_to report.title, report_path(report) %><%= t('views.common.mentioned_link') %>
       <%= report.created_on %>
     </div>
   <% end %>

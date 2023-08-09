@@ -46,8 +46,6 @@ class ReportsController < ApplicationController
         render :edit, status: :unprocessable_entity
       end
     end
-
-    render :edit, status: :unprocessable_entity
   end
 
   def destroy
