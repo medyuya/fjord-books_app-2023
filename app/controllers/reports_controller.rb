@@ -21,18 +21,21 @@ class ReportsController < ApplicationController
   def create
     @report = current_user.reports.new(report_params)
 
-    ActiveRecord::Base.transaction do
-      if @report.save
-        raise ActiveRecord::Rollback unless @report.link_detect_and_save
+    begin
+      ActiveRecord::Base.transaction do
+        if @report.save
+          raise ActiveRecord::Rollback unless @report.link_detect_and_save
 
-        redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
+          redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
 
-      else
-        render :new, status: :unprocessable_entity
+        else
+          render :new, status: :unprocessable_entity
+        end
       end
+    rescue StandardError => e
+      Rails.logger.error("An error occurred: #{e.message}")
+      render :new, status: :unprocessable_entity
     end
-
-    render :new, status: :unprocessable_entity
   end
 
   def update
@@ -46,6 +49,9 @@ class ReportsController < ApplicationController
         render :edit, status: :unprocessable_entity
       end
     end
+  rescue StandardError => e
+    Rails.logger.error("An error occurred: #{e.message}")
+    render :new, status: :unprocessable_entity
   end
 
   def destroy
