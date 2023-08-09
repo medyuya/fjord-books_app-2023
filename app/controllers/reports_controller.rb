@@ -36,10 +36,17 @@ class ReportsController < ApplicationController
   end
 
   def update
-    if @report.update(report_params)
-      redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
-    else
-      render :edit, status: :unprocessable_entity
+    ActiveRecord::Base.transaction do
+      if @report.update(report_params)
+        if @report.link_detect_and_update
+          redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
+        else
+          raise ActiveRecord::Rollback
+          render :edit, status: :unprocessable_entity
+        end
+      else
+        render :edit, status: :unprocessable_entity
+      end
     end
   end
 

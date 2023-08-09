@@ -23,14 +23,37 @@ class Report < ApplicationRecord
   end
 
   def link_detect_and_save
-    urls = self.content.scan(/http:\/\/localhost:3000\/reports\/\d+\b/)
-    extracted_report_ids = urls.map { |url| url.sub('http://localhost:3000/reports/', '').to_i }
+    extracted_report_ids = extract_report_ids(self.content)
 
-    extracted_report_ids.each do |report_id|
+    extracted_report_ids.all? do |report_id|
       mentioned_relationships = self.active_relationships.build(mentioned_id: report_id)
-      return false unless mentioned_relationships.save
+      mentioned_relationships.save
+    end
+  end
+
+  def link_detect_and_update
+    extracted_report_ids = extract_report_ids(self.content)
+
+    old_report_ids = self.mentioning_reports.ids - extracted_report_ids
+    new_report_ids = extracted_report_ids - self.mentioning_reports.ids
+
+    byebug
+
+    old_report_ids.all? do |report_id|
+      delete_mentions = MentionedRelationship.find_by(mentioning_id: self.id, mentioned_id: report_id)
+      delete_mentions.destroy
     end
 
-    true
+    new_report_ids.all? do |report_id|
+      mentioned_relationships = self.active_relationships.build(mentioned_id: report_id)
+      mentioned_relationships.save
+    end
+  end
+
+  private
+
+  def extract_report_ids(text)
+    urls = text.scan(/http:\/\/localhost:3000\/reports\/\d+\b/)
+    extracted_report_ids = urls.map { |url| url.sub('http://localhost:3000/reports/', '').to_i }
   end
 end
