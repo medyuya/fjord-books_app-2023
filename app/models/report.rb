@@ -37,8 +37,6 @@ class Report < ApplicationRecord
     old_report_ids = self.mentioning_reports.ids - extracted_report_ids
     new_report_ids = extracted_report_ids - self.mentioning_reports.ids
 
-    byebug
-
     old_report_ids.all? do |report_id|
       delete_mentions = MentionedRelationship.find_by(mentioning_id: self.id, mentioned_id: report_id)
       delete_mentions.destroy
