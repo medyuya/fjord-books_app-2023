@@ -5,10 +5,11 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @commentable.comments.build(comment_params)
+
     if @comment.save
       redirect_to @commentable, notice: t('controllers.common.notice_create', name: Comment.model_name.human)
     else
-      redirect_back(fallback_location: root_path)
+      render :new, status: :unprocessable_entity
     end
   end
 
