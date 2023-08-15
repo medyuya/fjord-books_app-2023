@@ -28,8 +28,7 @@ class Report < ApplicationRecord
     extracted_report_ids = extract_report_ids(content)
 
     extracted_report_ids.all? do |report_id|
-      mentioned_relationships = active_relationships.build(mentioned_id: report_id)
-      mentioned_relationships.save
+      active_relationships.build(mentioned_id: report_id).save
     end
   end
 
@@ -40,13 +39,11 @@ class Report < ApplicationRecord
     new_report_ids = extracted_report_ids - mentioning_reports.ids
 
     old_report_ids.all? do |report_id|
-      delete_mentions = MentionedRelationship.find_by(mentioning_id: id, mentioned_id: report_id)
-      delete_mentions.destroy
+      MentionedRelationship.find_by(mentioning_id: id, mentioned_id: report_id).destroy
     end
 
     new_report_ids.all? do |report_id|
-      mentioned_relationships = active_relationships.build(mentioned_id: report_id)
-      mentioned_relationships.save
+      active_relationships.build(mentioned_id: report_id).save
     end
   end
 
