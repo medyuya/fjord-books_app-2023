@@ -2,7 +2,7 @@
 
 class ReportsController < ApplicationController
   before_action :set_report, only: %i[show edit update destroy]
-  before_action :correct_user, only: %i[edit update destroy]
+  before_action :authorize_report_owner, only: %i[edit update destroy]
 
   def index
     @reports = Report.all
