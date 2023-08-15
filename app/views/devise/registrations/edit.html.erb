@@ -4,7 +4,7 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :email %><br />
+    <%= f.label :email %>
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
@@ -13,36 +13,35 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :password %> <i>(<%= t('views.users.no_change_password') %>)</i><br />
+    <%= f.label :password %> <i>(<%= t('views.users.no_change_password') %>)</i>
     <%= f.password_field :password, autocomplete: "new-password" %>
     <% if @minimum_password_length %>
-      <br />
       <em><%= t('views.users.min_password_length') %><%= @minimum_password_length %></em>
     <% end %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
   <div class="field">
-    <%= f.label :current_password %> <i>(<%= t('views.users.current_password_input') %>)</i><br />
+    <%= f.label :current_password %> <i>(<%= t('views.users.current_password_input') %>)</i>
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
   <div class="field">
-    <%= f.label :profile %><br />
+    <%= f.label :profile %>
     <%= f.text_field :profile, autofocus: true, autocomplete: "profile" %>
   </div>
 
   <div class="field">
-    <%= f.label :post_code %><br />
+    <%= f.label :post_code %>
     <%= f.text_field :post_code, autofocus: true, autocomplete: "post_code" %>
   </div>
 
   <div class="field">
-    <%= f.label :address %><br />
+    <%= f.label :address %>
     <%= f.text_field :address, autofocus: true, autocomplete: "address" %>
   </div>
 
