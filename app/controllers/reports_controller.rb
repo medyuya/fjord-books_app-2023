@@ -53,7 +53,7 @@ class ReportsController < ApplicationController
     params.require(:report).permit(:title, :content)
   end
 
-  def correct_user
+  def authorize_report_owner
     @report = Report.find(params[:id])
     return if @report.user == current_user
 
