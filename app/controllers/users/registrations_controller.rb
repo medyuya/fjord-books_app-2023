@@ -6,8 +6,4 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def after_update_path_for(_resource)
     user_path(current_user)
   end
-
-  def update_resource(resource, params)
-    resource.update_without_current_password(params)
-  end
 end
