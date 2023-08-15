@@ -21,14 +21,16 @@
 
   <h3><%= t('views.common.mentioned_links') %></h3>
 
-  <% report.mentioned_reports.each do |report| %>
-    <div>
-      <% if report.user.avatar.attached? %>
-        <%= image_tag report.user.avatar.variant(:thumb) %>
-      <% end %>
-      <%= link_to report.title, report_path(report) %><%= t('views.common.mentioned_link') %>
-      <%= report.created_on %>
-    </div>
-  <% end %>
+  <ul>
+    <% report.mentioned_reports.each do |report| %>
+      <li>
+        <% if report.user.avatar.attached? %>
+          <%= image_tag report.user.avatar.variant(:thumb) %>
+        <% end %>
+        <%= link_to report.title, report_path(report) %><%= t('views.common.mentioned_link') %>
+        <%= report.created_on %>
+      </li>
+    <% end %>
+  </ul>
 
 </div>
