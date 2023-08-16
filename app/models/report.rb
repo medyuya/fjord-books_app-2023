@@ -28,11 +28,9 @@ class Report < ApplicationRecord
     transaction_successful = false
 
     ActiveRecord::Base.transaction do
-      if self.save && self.linked_reports_save
-        transaction_successful = true
-      else
-        raise ActiveRecord::Rollback
-      end
+      raise ActiveRecord::Rollback unless save && linked_reports_save
+
+      transaction_successful = true
     end
 
     transaction_successful
@@ -42,11 +40,9 @@ class Report < ApplicationRecord
     transaction_successful = false
 
     ActiveRecord::Base.transaction do
-      if self.update(report_params) && self.linked_reports_update
-        transaction_successful = true
-      else
-        raise ActiveRecord::Rollback
-      end
+      raise ActiveRecord::Rollback unless update(report_params) && linked_reports_update
+
+      transaction_successful = true
     end
 
     transaction_successful
@@ -55,11 +51,9 @@ class Report < ApplicationRecord
   def linked_reports_save
     extracted_report_ids = extract_report_ids(content)
 
-    has_reports_saved = extracted_report_ids.all? do |report_id|
+    extracted_report_ids.all? do |report_id|
       active_relationships.build(mentioned_id: report_id).save
     end
-
-    has_reports_saved
   end
 
   def linked_reports_update
