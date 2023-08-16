@@ -27,9 +27,11 @@ class Report < ApplicationRecord
   def link_detect_and_save
     extracted_report_ids = extract_report_ids(content)
 
-    extracted_report_ids.all? do |report_id|
+    has_reports_saved = extracted_report_ids.all? do |report_id|
       active_relationships.build(mentioned_id: report_id).save
     end
+
+    has_reports_saved
   end
 
   def link_detect_and_update
@@ -38,13 +40,15 @@ class Report < ApplicationRecord
     old_report_ids = mentioning_reports.ids - extracted_report_ids
     new_report_ids = extracted_report_ids - mentioning_reports.ids
 
-    old_report_ids.all? do |report_id|
-      MentionedRelationship.find_by(mentioning_id: id, mentioned_id: report_id).destroy
+    has_reports_destroyed = old_report_ids.all? do |report_id|
+      active_relationships.find_by(mentioned_id: report_id).destroy
     end
 
-    new_report_ids.all? do |report_id|
+    has_reports_saved = new_report_ids.all? do |report_id|
       active_relationships.build(mentioned_id: report_id).save
     end
+
+    has_reports_destroyed && has_reports_saved
   end
 
   private
