@@ -25,6 +25,34 @@ class Report < ApplicationRecord
   end
 
   def link_detect_and_save
+    transaction_successful = false
+
+    ActiveRecord::Base.transaction do
+      if self.save && self.linked_reports_save
+        transaction_successful = true
+      else
+        raise ActiveRecord::Rollback
+      end
+    end
+
+    transaction_successful
+  end
+
+  def link_detect_and_update(report_params)
+    transaction_successful = false
+
+    ActiveRecord::Base.transaction do
+      if self.update(report_params) && self.linked_reports_update
+        transaction_successful = true
+      else
+        raise ActiveRecord::Rollback
+      end
+    end
+
+    transaction_successful
+  end
+
+  def linked_reports_save
     extracted_report_ids = extract_report_ids(content)
 
     has_reports_saved = extracted_report_ids.all? do |report_id|
@@ -34,7 +62,7 @@ class Report < ApplicationRecord
     has_reports_saved
   end
 
-  def link_detect_and_update
+  def linked_reports_update
     extracted_report_ids = extract_report_ids(content)
 
     old_report_ids = mentioning_reports.ids - extracted_report_ids
