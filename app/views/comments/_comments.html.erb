@@ -1,5 +1,5 @@
 <ul>
-  <% if comments.any? %>
+  <% if comments&.any? %>
     <% comments.each do |comment| %>
       <div>
         <%= comment.user.name_or_email %>

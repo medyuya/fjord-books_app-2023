@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to @commentable, notice: t('controllers.common.notice_create', name: Comment.model_name.human)
     else
-      render :new, status: :unprocessable_entity
+      render_commentable_show
     end
   end
 
