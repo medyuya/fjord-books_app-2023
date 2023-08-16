@@ -50,7 +50,6 @@ class Report < ApplicationRecord
   private
 
   def extract_report_ids(text)
-    urls = text.scan(%r{http://localhost:3000/reports/\d+\b})
-    urls.map { |url| url.sub('http://localhost:3000/reports/', '').to_i }
+    text.scan(%r{http://localhost:3000/reports/(\d+)\b}).flatten.map(&:to_i)
   end
 end
