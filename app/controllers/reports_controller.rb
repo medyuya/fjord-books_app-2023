@@ -4,7 +4,7 @@ class ReportsController < ApplicationController
   before_action :set_report, only: %i[edit update destroy]
 
   def index
-    @reports = Report.includes(:user, :mentioned_reports).order(id: :desc).page(params[:page])
+    @reports = Report.includes(:user).order(id: :desc).page(params[:page])
   end
 
   def show
