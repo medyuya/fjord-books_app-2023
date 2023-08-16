@@ -32,7 +32,7 @@ class ReportsController < ApplicationController
     if @report.link_detect_and_update(report_params)
       redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
     else
-      render :new, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
   end
 
