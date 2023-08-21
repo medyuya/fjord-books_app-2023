@@ -25,27 +25,19 @@ class Report < ApplicationRecord
   end
 
   def link_detect_and_save
-    transaction_successful = false
-
     ActiveRecord::Base.transaction do
-      raise ActiveRecord::Rollback unless save && linked_reports_save
-
-      transaction_successful = true
+      success = save && linked_reports_save
+      raise ActiveRecord::Rollback unless success
+      success
     end
-
-    transaction_successful
   end
 
   def link_detect_and_update(report_params)
-    transaction_successful = false
-
     ActiveRecord::Base.transaction do
-      raise ActiveRecord::Rollback unless update(report_params) && linked_reports_update
-
-      transaction_successful = true
+      success = update(report_params) && linked_reports_update
+      raise ActiveRecord::Rollback unless success
+      success
     end
-
-    transaction_successful
   end
 
   def linked_reports_save
