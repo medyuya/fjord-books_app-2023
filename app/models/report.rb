@@ -41,7 +41,7 @@ class Report < ApplicationRecord
   end
 
   def linked_reports_save
-    extracted_report_ids = extract_report_ids
+    extracted_report_ids = extract_report_ids_in_content
 
     extracted_report_ids.all? do |report_id|
       active_relationships.build(mentioned_id: report_id).save
@@ -49,7 +49,7 @@ class Report < ApplicationRecord
   end
 
   def linked_reports_update
-    extracted_report_ids = extract_report_ids
+    extracted_report_ids = extract_report_ids_in_content
 
     old_report_ids = mentioning_reports.ids - extracted_report_ids
     new_report_ids = extracted_report_ids - mentioning_reports.ids
