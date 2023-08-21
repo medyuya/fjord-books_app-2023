@@ -24,9 +24,6 @@
   <ul>
     <% report.mentioned_reports.order(created_at: :desc, id: :desc).each do |report| %>
       <li>
-        <% if report.user.avatar.attached? %>
-          <%= image_tag report.user.avatar.variant(:thumb) %>
-        <% end %>
         <%= link_to report.title, report_path(report) %><%= t('views.common.mentioned_link') %>
         <%= report.created_on %>
       </li>
