@@ -49,7 +49,7 @@ class Report < ApplicationRecord
   end
 
   def linked_reports_save
-    extracted_report_ids = extract_report_ids(content)
+    extracted_report_ids = extract_report_ids
 
     extracted_report_ids.all? do |report_id|
       active_relationships.build(mentioned_id: report_id).save
@@ -57,7 +57,7 @@ class Report < ApplicationRecord
   end
 
   def linked_reports_update
-    extracted_report_ids = extract_report_ids(content)
+    extracted_report_ids = extract_report_ids
 
     old_report_ids = mentioning_reports.ids - extracted_report_ids
     new_report_ids = extracted_report_ids - mentioning_reports.ids
@@ -75,7 +75,7 @@ class Report < ApplicationRecord
 
   private
 
-  def extract_report_ids(text)
-    text.scan(%r{http://localhost:3000/reports/(\d+)\b}).flatten.map(&:to_i)
+  def extract_report_ids_in_content
+    content.scan(%r{http://localhost:3000/reports/(\d+)\b}).flatten.map(&:to_i)
   end
 end
