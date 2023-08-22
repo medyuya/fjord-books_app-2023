@@ -28,6 +28,7 @@ class Report < ApplicationRecord
     ActiveRecord::Base.transaction do
       success = save && linked_reports_save
       raise ActiveRecord::Rollback unless success
+
       success
     end
   end
@@ -36,6 +37,7 @@ class Report < ApplicationRecord
     ActiveRecord::Base.transaction do
       success = update(report_params) && linked_reports_update
       raise ActiveRecord::Rollback unless success
+
       success
     end
   end
