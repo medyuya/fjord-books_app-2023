@@ -42,6 +42,8 @@ class Report < ApplicationRecord
     end
   end
 
+  private
+
   def linked_reports_save
     extracted_report_ids = extract_report_ids_in_content
 
@@ -66,8 +68,6 @@ class Report < ApplicationRecord
 
     has_reports_destroyed && has_reports_saved
   end
-
-  private
 
   def extract_report_ids_in_content
     content.scan(%r{http://localhost:3000/reports/(\d+)\b}).flatten.map(&:to_i)
