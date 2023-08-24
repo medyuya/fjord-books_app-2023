@@ -60,8 +60,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_09_083112) do
   end
 
   create_table "mentioned_relationships", force: :cascade do |t|
-    t.integer "mentioning_id"
-    t.integer "mentioned_id"
+    t.integer "mentioning_id", null: false
+    t.integer "mentioned_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["mentioning_id", "mentioned_id"], name: "index_mentioned_relationships_on_mentioning_id_and_mentioned_id", unique: true
