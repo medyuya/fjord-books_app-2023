@@ -1,0 +1,21 @@
+<h1><%= t('views.common.title_index', name: 'ユーザー') %></h1>
+<div>
+  <% @users.each do |user| %>
+    <div>
+      <div>
+        <%= t('activerecord.attributes.user.profile') %>:
+        <%= user.profile %>
+      </div>
+      <div>
+        <%= t('activerecord.attributes.user.address') %>:
+        <%= user.address %>
+      </div>
+      <div>
+        <%= t('activerecord.attributes.user.post_code') %>:
+        <%= user.post_code %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= paginate @users %>
