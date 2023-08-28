@@ -1,8 +1,8 @@
 class CreateMentionedRelationships < ActiveRecord::Migration[7.0]
   def change
     create_table :mentioned_relationships do |t|
-      t.integer :mentioning_id, null: false, foreign_key: true
-      t.integer :mentioned_id, null: false, foreign_key: true
+      t.belongs_to :mentioning, null: false, foreign_key: { to_table: :reports }
+      t.belongs_to :mentioned, null: false, foreign_key: { to_table: :reports }
 
       t.timestamps
     end
