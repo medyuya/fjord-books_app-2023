@@ -19,7 +19,7 @@ class ReportTest < ActiveSupport::TestCase
   end
 
   test "created_on returns true" do
-    report = FactoryBot.create(:report, user_id: @user.id, created_at: 'Wed, 30 Aug 2023 21:20:50 JST +09:00')
-    assert_equal 'Wed, 30 Aug 2023', report.created_on
+    report = FactoryBot.create(:report, user_id: @user.id, created_at: Time.parse("2023-08-30 12:00:00"))
+    assert_equal Date.new(2023, 8, 30), report.created_on
   end
 end
