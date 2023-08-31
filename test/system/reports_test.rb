@@ -12,6 +12,7 @@ class ReportsTest < ApplicationSystemTestCase
     report = FactoryBot.create(:report, user_id: @user.id, created_at: Time.zone.parse('2023-08-30 12:00:00'))
 
     visit reports_url
+    assert_selector 'h1', text: '日報の一覧'
     within 'div.index-item' do
       within "div#report_#{report.id}" do
         assert_selector 'p', text: report.title
@@ -19,10 +20,25 @@ class ReportsTest < ApplicationSystemTestCase
         assert_selector 'p', text: report.user.name
         assert_selector 'p', text: '2023/08/30'
       end
-      click_on 'この日報を表示'
+      assert_selector 'a', text: 'この日報を表示'
     end
+    assert_selector 'a', text: '日報の新規作成'
+  end
 
-    assert_current_path "/reports/#{report.id}"
+  test 'elements on report show page' do
+    report = FactoryBot.create(:report, user_id: @user.id, created_at: Time.zone.parse('2023-08-30 12:00:00'))
+
+    visit report_url report
+    assert_selector 'h1', text: '日報の詳細'
+    within "div#report_#{report.id}" do
+      assert_selector 'p', text: report.title
+      assert_selector 'p', text: report.content
+      assert_selector 'p', text: report.user.name
+      assert_selector 'p', text: '2023/08/30'
+    end
+    assert_selector 'a', text: 'この日報を編集'
+    assert_selector 'a', text: '日報の一覧に戻る'
+    assert_selector 'button', text: 'この日報を削除'
   end
 
   test 'create a new report with proper inputs' do
