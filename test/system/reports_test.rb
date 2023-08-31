@@ -32,4 +32,29 @@ class ReportsTest < ApplicationSystemTestCase
     assert_selector 'li', text: 'タイトルを入力してください'
     assert_selector 'li', text: '内容を入力してください'
   end
+
+  test 'update a report with proper inputs' do
+    report = FactoryBot.create(:report, user_id: @user.id)
+
+    visit edit_report_url report
+    fill_in 'report[title]', with: 'ブルーベリー本を読んだ'
+    fill_in 'report[content]', with: '少し難しく感じました。'
+    click_on '更新する'
+
+    assert_current_path "/reports/#{report.id}"
+    assert_selector 'p#notice', text: '日報が更新されました。'
+  end
+
+  test 'update a report with empty inputs' do
+    report = FactoryBot.create(:report, user_id: @user.id)
+
+    visit edit_report_url report
+    fill_in 'report[title]', with: ''
+    fill_in 'report[content]', with: ''
+    click_on '更新する'
+
+    assert_current_path "/reports/#{report.id}/edit"
+    assert_selector 'li', text: 'タイトルを入力してください'
+    assert_selector 'li', text: '内容を入力してください'
+  end
 end
