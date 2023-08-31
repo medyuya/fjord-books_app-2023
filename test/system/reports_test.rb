@@ -8,6 +8,23 @@ class ReportsTest < ApplicationSystemTestCase
     login_as(@user.email, @user.password)
   end
 
+  test 'elements on report index page' do
+    report = FactoryBot.create(:report, user_id: @user.id, created_at: Time.zone.parse('2023-08-30 12:00:00'))
+
+    visit reports_url
+    within 'div.index-item' do
+      within "div#report_#{report.id}" do
+        assert_selector 'p', text: report.title
+        assert_selector 'p', text: report.content
+        assert_selector 'p', text: report.user.name
+        assert_selector 'p', text: '2023/08/30'
+      end
+      click_on 'この日報を表示'
+    end
+
+    assert_current_path "/reports/#{report.id}"
+  end
+
   test 'create a new report with proper inputs' do
     assert_current_path '/books'
 
