@@ -57,4 +57,14 @@ class ReportsTest < ApplicationSystemTestCase
     assert_selector 'li', text: 'タイトルを入力してください'
     assert_selector 'li', text: '内容を入力してください'
   end
+
+  test 'delete a report' do
+    report = FactoryBot.create(:report, user_id: @user.id)
+
+    visit report_url report
+    click_on 'この日報を削除'
+
+    assert_current_path '/reports'
+    assert_selector 'p#notice', text: '日報が削除されました。'
+  end
 end
