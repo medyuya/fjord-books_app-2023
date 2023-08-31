@@ -6,6 +6,7 @@ module LoginSupport
     fill_in 'user[email]', with: user_email
     fill_in 'user[password]', with: user_password
     click_on 'ログイン'
+
     assert_current_path '/books'
     assert_selector 'p#notice', text: 'ログインしました。'
   end
