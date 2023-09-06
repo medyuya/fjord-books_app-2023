@@ -9,36 +9,40 @@ class ReportsTest < ApplicationSystemTestCase
   end
 
   test 'elements on report index page' do
-    report = FactoryBot.create(:report, user_id: @user.id, created_at: Time.zone.parse('2023-08-30 12:00:00'))
+    travel_to Time.zone.local(2023, 8, 30) do
+      report = FactoryBot.create(:report, user_id: @user.id)
 
-    visit reports_url
-    assert_text '日報の一覧'
-    within 'div.index-item' do
+      visit reports_url
+      assert_text '日報の一覧'
+      within 'div.index-item' do
+        within "div#report_#{report.id}" do
+          assert_text report.title
+          assert_text report.content
+          assert_link report.user.name
+          assert_text '2023/08/30'
+        end
+        assert_link 'この日報を表示'
+      end
+      assert_link '日報の新規作成'
+    end
+  end
+
+  test 'elements on report show page' do
+    travel_to Time.zone.local(2023, 8, 30) do
+      report = FactoryBot.create(:report, user_id: @user.id)
+
+      visit report_url report
+      assert_text '日報の詳細'
       within "div#report_#{report.id}" do
         assert_text report.title
         assert_text report.content
         assert_link report.user.name
         assert_text '2023/08/30'
       end
-      assert_link 'この日報を表示'
+      assert_link 'この日報を編集'
+      assert_link '日報の一覧に戻る'
+      assert_selector 'button', text: 'この日報を削除'
     end
-    assert_link '日報の新規作成'
-  end
-
-  test 'elements on report show page' do
-    report = FactoryBot.create(:report, user_id: @user.id, created_at: Time.zone.parse('2023-08-30 12:00:00'))
-
-    visit report_url report
-    assert_text '日報の詳細'
-    within "div#report_#{report.id}" do
-      assert_text report.title
-      assert_text report.content
-      assert_link report.user.name
-      assert_text '2023/08/30'
-    end
-    assert_link 'この日報を編集'
-    assert_link '日報の一覧に戻る'
-    assert_selector 'button', text: 'この日報を削除'
   end
 
   test 'create a new report with proper inputs' do
