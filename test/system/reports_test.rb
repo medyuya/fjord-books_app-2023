@@ -98,11 +98,16 @@ class ReportsTest < ApplicationSystemTestCase
   end
 
   test 'delete a report' do
-    report = FactoryBot.create(:report, user_id: @user.id)
+    report = FactoryBot.create(:report, user_id: @user.id, title: 'キウイ本を読んだ', content: 'ちょうど良い難易度でした')
 
     visit report_url report
     click_on 'この日報を削除'
 
     assert_text '日報が削除されました。'
+
+    within 'div.index-items' do
+      assert_no_text 'キウイ本を読んだ'
+      assert_no_text 'ちょうど良い難易度でした'
+    end
   end
 end
