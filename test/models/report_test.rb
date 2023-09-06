@@ -13,7 +13,7 @@ class ReportTest < ActiveSupport::TestCase
   end
 
   test 'editable? returns false' do
-    other_user = FactoryBot.create(:other_user)
+    other_user = FactoryBot.create(:user)
     report = FactoryBot.create(:report, user: other_user)
     assert_not report.editable?(@user)
   end
