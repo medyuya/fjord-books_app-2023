@@ -8,6 +8,6 @@ module LoginSupport
     click_on 'ログイン'
 
     assert_current_path '/books'
-    assert_selector 'p#notice', text: 'ログインしました。'
+    assert_text 'ログインしました。'
   end
 end

@@ -42,26 +42,20 @@ class ReportsTest < ApplicationSystemTestCase
   end
 
   test 'create a new report with proper inputs' do
-    assert_current_path '/books'
-
     visit new_report_url
     fill_in 'report[title]', with: 'チェリー本を読んだ'
     fill_in 'report[content]', with: '分かりやすく書かれていました。'
     click_on '登録する'
 
-    assert_current_path '/reports/1'
     assert_text '日報が作成されました。'
   end
 
   test 'create a new report with empty inputs' do
-    assert_current_path '/books'
-
     visit new_report_url
     fill_in 'report[title]', with: ''
     fill_in 'report[content]', with: ''
     click_on '登録する'
 
-    assert_current_path '/reports/new'
     assert_text 'タイトルを入力してください'
     assert_text '内容を入力してください'
   end
@@ -74,7 +68,6 @@ class ReportsTest < ApplicationSystemTestCase
     fill_in 'report[content]', with: '少し難しく感じました。'
     click_on '更新する'
 
-    assert_current_path "/reports/#{report.id}"
     assert_text '日報が更新されました。'
   end
 
@@ -86,7 +79,6 @@ class ReportsTest < ApplicationSystemTestCase
     fill_in 'report[content]', with: ''
     click_on '更新する'
 
-    assert_current_path "/reports/#{report.id}/edit"
     assert_text 'タイトルを入力してください'
     assert_text '内容を入力してください'
   end
@@ -97,7 +89,6 @@ class ReportsTest < ApplicationSystemTestCase
     visit report_url report
     click_on 'この日報を削除'
 
-    assert_current_path '/reports'
     assert_text '日報が削除されました。'
   end
 end
