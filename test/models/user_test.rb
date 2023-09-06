@@ -9,7 +9,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'name_or_email returns the email' do
-    user = FactoryBot.create(:user)
+    user = FactoryBot.create(:user, email: 'ken@example.com', name: '')
     assert_equal 'ken@example.com', user.name_or_email
   end
 end
