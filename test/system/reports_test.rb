@@ -52,6 +52,11 @@ class ReportsTest < ApplicationSystemTestCase
     click_on '登録する'
 
     assert_text '日報が作成されました。'
+
+    within "div.show-item" do
+      assert_text 'チェリー本を読んだ'
+      assert_text '分かりやすく書かれていました。'
+    end
   end
 
   test 'create a new report with empty inputs' do
@@ -73,6 +78,11 @@ class ReportsTest < ApplicationSystemTestCase
     click_on '更新する'
 
     assert_text '日報が更新されました。'
+
+    within "div.show-item" do
+      assert_text 'ブルーベリー本を読んだ'
+      assert_text '少し難しく感じました。'
+    end
   end
 
   test 'update a report with empty inputs' do
