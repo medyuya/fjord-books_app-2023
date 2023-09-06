@@ -4,21 +4,21 @@ require 'application_system_test_case'
 
 class ReportsTest < ApplicationSystemTestCase
   def setup
-    @user = FactoryBot.create(:user)
+    @user = FactoryBot.create(:user, name: 'ケン')
     login_as(@user.email, @user.password)
   end
 
   test 'elements on report index page' do
     travel_to Time.zone.local(2023, 8, 30) do
-      report = FactoryBot.create(:report, user_id: @user.id)
+      report = FactoryBot.create(:report, user_id: @user.id, title: 'キウイ本を読んだ', content: 'ちょうど良い難易度でした')
 
       visit reports_url
       assert_text '日報の一覧'
       within 'div.index-item' do
         within "div#report_#{report.id}" do
-          assert_text report.title
-          assert_text report.content
-          assert_link report.user.name
+          assert_text 'キウイ本を読んだ'
+          assert_text 'ちょうど良い難易度でした'
+          assert_link 'ケン'
           assert_text '2023/08/30'
         end
         assert_link 'この日報を表示'
@@ -29,14 +29,14 @@ class ReportsTest < ApplicationSystemTestCase
 
   test 'elements on report show page' do
     travel_to Time.zone.local(2023, 8, 30) do
-      report = FactoryBot.create(:report, user_id: @user.id)
+      report = FactoryBot.create(:report, user_id: @user.id, title: 'キウイ本を読んだ', content: 'ちょうど良い難易度でした')
 
       visit report_url report
       assert_text '日報の詳細'
       within "div#report_#{report.id}" do
-        assert_text report.title
-        assert_text report.content
-        assert_link report.user.name
+        assert_text 'キウイ本を読んだ'
+        assert_text 'ちょうど良い難易度でした'
+        assert_link 'ケン'
         assert_text '2023/08/30'
       end
       assert_link 'この日報を編集'
