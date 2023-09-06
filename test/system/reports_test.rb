@@ -43,8 +43,8 @@ class ReportsTest < ApplicationSystemTestCase
 
   test 'create a new report with proper inputs' do
     visit new_report_url
-    fill_in 'report[title]', with: 'チェリー本を読んだ'
-    fill_in 'report[content]', with: '分かりやすく書かれていました。'
+    fill_in 'タイトル', with: 'チェリー本を読んだ'
+    fill_in '内容', with: '分かりやすく書かれていました。'
     click_on '登録する'
 
     assert_text '日報が作成されました。'
@@ -52,8 +52,8 @@ class ReportsTest < ApplicationSystemTestCase
 
   test 'create a new report with empty inputs' do
     visit new_report_url
-    fill_in 'report[title]', with: ''
-    fill_in 'report[content]', with: ''
+    fill_in 'タイトル', with: ''
+    fill_in '内容', with: ''
     click_on '登録する'
 
     assert_text 'タイトルを入力してください'
@@ -64,8 +64,8 @@ class ReportsTest < ApplicationSystemTestCase
     report = FactoryBot.create(:report, user_id: @user.id)
 
     visit edit_report_url report
-    fill_in 'report[title]', with: 'ブルーベリー本を読んだ'
-    fill_in 'report[content]', with: '少し難しく感じました。'
+    fill_in 'タイトル', with: 'ブルーベリー本を読んだ'
+    fill_in '内容', with: '少し難しく感じました。'
     click_on '更新する'
 
     assert_text '日報が更新されました。'
@@ -75,8 +75,8 @@ class ReportsTest < ApplicationSystemTestCase
     report = FactoryBot.create(:report, user_id: @user.id)
 
     visit edit_report_url report
-    fill_in 'report[title]', with: ''
-    fill_in 'report[content]', with: ''
+    fill_in 'タイトル', with: ''
+    fill_in '内容', with: ''
     click_on '更新する'
 
     assert_text 'タイトルを入力してください'
