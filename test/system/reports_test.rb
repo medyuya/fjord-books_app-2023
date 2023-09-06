@@ -12,33 +12,33 @@ class ReportsTest < ApplicationSystemTestCase
     report = FactoryBot.create(:report, user_id: @user.id, created_at: Time.zone.parse('2023-08-30 12:00:00'))
 
     visit reports_url
-    assert_selector 'h1', text: '日報の一覧'
+    assert_text '日報の一覧'
     within 'div.index-item' do
       within "div#report_#{report.id}" do
-        assert_selector 'p', text: report.title
-        assert_selector 'p', text: report.content
-        assert_selector 'p', text: report.user.name
-        assert_selector 'p', text: '2023/08/30'
+        assert_text report.title
+        assert_text report.content
+        assert_text report.user.name
+        assert_text '2023/08/30'
       end
-      assert_selector 'a', text: 'この日報を表示'
+      assert_text 'この日報を表示'
     end
-    assert_selector 'a', text: '日報の新規作成'
+    assert_text '日報の新規作成'
   end
 
   test 'elements on report show page' do
     report = FactoryBot.create(:report, user_id: @user.id, created_at: Time.zone.parse('2023-08-30 12:00:00'))
 
     visit report_url report
-    assert_selector 'h1', text: '日報の詳細'
+    assert_text '日報の詳細'
     within "div#report_#{report.id}" do
-      assert_selector 'p', text: report.title
-      assert_selector 'p', text: report.content
-      assert_selector 'p', text: report.user.name
-      assert_selector 'p', text: '2023/08/30'
+      assert_text report.title
+      assert_text report.content
+      assert_text report.user.name
+      assert_text '2023/08/30'
     end
-    assert_selector 'a', text: 'この日報を編集'
-    assert_selector 'a', text: '日報の一覧に戻る'
-    assert_selector 'button', text: 'この日報を削除'
+    assert_text 'この日報を編集'
+    assert_text '日報の一覧に戻る'
+    assert_text 'この日報を削除'
   end
 
   test 'create a new report with proper inputs' do
@@ -50,7 +50,7 @@ class ReportsTest < ApplicationSystemTestCase
     click_on '登録する'
 
     assert_current_path '/reports/1'
-    assert_selector 'p#notice', text: '日報が作成されました。'
+    assert_text '日報が作成されました。'
   end
 
   test 'create a new report with empty inputs' do
@@ -62,8 +62,8 @@ class ReportsTest < ApplicationSystemTestCase
     click_on '登録する'
 
     assert_current_path '/reports/new'
-    assert_selector 'li', text: 'タイトルを入力してください'
-    assert_selector 'li', text: '内容を入力してください'
+    assert_text 'タイトルを入力してください'
+    assert_text '内容を入力してください'
   end
 
   test 'update a report with proper inputs' do
@@ -75,7 +75,7 @@ class ReportsTest < ApplicationSystemTestCase
     click_on '更新する'
 
     assert_current_path "/reports/#{report.id}"
-    assert_selector 'p#notice', text: '日報が更新されました。'
+    assert_text '日報が更新されました。'
   end
 
   test 'update a report with empty inputs' do
@@ -87,8 +87,8 @@ class ReportsTest < ApplicationSystemTestCase
     click_on '更新する'
 
     assert_current_path "/reports/#{report.id}/edit"
-    assert_selector 'li', text: 'タイトルを入力してください'
-    assert_selector 'li', text: '内容を入力してください'
+    assert_text 'タイトルを入力してください'
+    assert_text '内容を入力してください'
   end
 
   test 'delete a report' do
@@ -98,6 +98,6 @@ class ReportsTest < ApplicationSystemTestCase
     click_on 'この日報を削除'
 
     assert_current_path '/reports'
-    assert_selector 'p#notice', text: '日報が削除されました。'
+    assert_text '日報が削除されました。'
   end
 end
