@@ -53,10 +53,8 @@ class ReportsTest < ApplicationSystemTestCase
 
     assert_text '日報が作成されました。'
 
-    within "div.show-item" do
-      assert_text 'チェリー本を読んだ'
-      assert_text '分かりやすく書かれていました。'
-    end
+    assert_text 'チェリー本を読んだ'
+    assert_text '分かりやすく書かれていました。'
   end
 
   test 'create a new report with empty inputs' do
@@ -79,10 +77,8 @@ class ReportsTest < ApplicationSystemTestCase
 
     assert_text '日報が更新されました。'
 
-    within "div.show-item" do
-      assert_text 'ブルーベリー本を読んだ'
-      assert_text '少し難しく感じました。'
-    end
+    assert_text 'ブルーベリー本を読んだ'
+    assert_text '少し難しく感じました。'
   end
 
   test 'update a report with empty inputs' do
@@ -105,9 +101,7 @@ class ReportsTest < ApplicationSystemTestCase
 
     assert_text '日報が削除されました。'
 
-    within 'div.index-items' do
-      assert_no_text 'キウイ本を読んだ'
-      assert_no_text 'ちょうど良い難易度でした'
-    end
+    assert_no_text 'キウイ本を読んだ'
+    assert_no_text 'ちょうど良い難易度でした'
   end
 end
