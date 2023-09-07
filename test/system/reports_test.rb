@@ -94,6 +94,9 @@ class ReportsTest < ApplicationSystemTestCase
   test 'delete a report' do
     report = FactoryBot.create(:report, user_id: @user.id, title: 'キウイ本を読んだ', content: 'ちょうど良い難易度でした')
 
+    visit reports_url
+    assert_text 'キウイ本を読んだ'
+
     visit report_url report
     click_on 'この日報を削除'
 
