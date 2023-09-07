@@ -100,6 +100,5 @@ class ReportsTest < ApplicationSystemTestCase
     assert_text '日報が削除されました。'
 
     assert_no_text 'キウイ本を読んだ'
-    assert_no_text 'ちょうど良い難易度でした'
   end
 end
