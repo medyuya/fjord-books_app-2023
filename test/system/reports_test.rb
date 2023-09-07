@@ -14,15 +14,13 @@ class ReportsTest < ApplicationSystemTestCase
 
       visit reports_url
       assert_text '日報の一覧'
-      within 'div.index-item' do
-        within "div#report_#{report.id}" do
-          assert_text 'キウイ本を読んだ'
-          assert_text 'ちょうど良い難易度でした'
-          assert_link 'ケン'
-          assert_text '2023/08/30'
-        end
-        assert_link 'この日報を表示'
+      within "div#report_#{report.id}" do
+        assert_text 'キウイ本を読んだ'
+        assert_text 'ちょうど良い難易度でした'
+        assert_link 'ケン'
+        assert_text '2023/08/30'
       end
+      assert_link 'この日報を表示'
       assert_link '日報の新規作成'
     end
   end
