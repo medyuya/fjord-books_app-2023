@@ -19,4 +19,15 @@
     <%= l report.created_on %>
   </p>
 
+  <h3><%= t('views.common.mentioned_links') %></h3>
+
+  <ul>
+    <% report.mentioned_reports.order(created_at: :desc, id: :desc).each do |report| %>
+      <li>
+        <%= link_to report.title, report_path(report) %><%= t('views.common.mentioned_link') %>
+        <%= l report.created_on %>
+      </li>
+    <% end %>
+  </ul>
+
 </div>
