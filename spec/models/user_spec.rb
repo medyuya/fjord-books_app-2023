@@ -11,7 +11,7 @@ RSpec.describe User, type: :model do
     end
 
     context 'when name is not present' do
-      let!(:user_with_email) { create(:user, email: 'ken@example.com') }
+      let!(:user_with_email) { create(:user, email: 'ken@example.com', name: '') }
 
       it 'returns the email' do
         expect(user_with_email.name_or_email).to eq 'ken@example.com'
