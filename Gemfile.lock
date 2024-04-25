@@ -1,3 +1,36 @@
+GIT
+  remote: https://github.com/rspec/rspec-core.git
+  revision: 1e661db5c5b431c0ee88a383e8e3767f02dccbfe
+  branch: main
+  specs:
+    rspec-core (3.14.0.pre)
+      rspec-support (= 3.14.0.pre)
+
+GIT
+  remote: https://github.com/rspec/rspec-expectations.git
+  revision: e859d358fff504f9132cb9eaa9b33765e73fc187
+  branch: main
+  specs:
+    rspec-expectations (3.14.0.pre)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (= 3.14.0.pre)
+
+GIT
+  remote: https://github.com/rspec/rspec-mocks.git
+  revision: 66c3dcac3bf91d6d12bb6d54dcc2092657cba33a
+  branch: main
+  specs:
+    rspec-mocks (3.14.0.pre)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (= 3.14.0.pre)
+
+GIT
+  remote: https://github.com/rspec/rspec-support.git
+  revision: 8cbf7f9aecbefacd74da16ec2e713358ff72925b
+  branch: main
+  specs:
+    rspec-support (3.14.0.pre)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -110,6 +143,7 @@ GEM
       warden (~> 1.2.3)
     devise-i18n (1.11.0)
       devise (>= 4.9.0)
+    diff-lcs (1.5.1)
     erb_lint (0.3.1)
       activesupport
       better_html (>= 2.0.1)
@@ -234,6 +268,14 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     rexml (3.2.5)
+    rspec-rails (6.1.2)
+      actionpack (>= 6.1)
+      activesupport (>= 6.1)
+      railties (>= 6.1)
+      rspec-core (~> 3.13)
+      rspec-expectations (~> 3.13)
+      rspec-mocks (~> 3.13)
+      rspec-support (~> 3.13)
     rubocop (1.45.1)
       json (~> 2.3)
       parallel (~> 1.10)
@@ -326,6 +368,11 @@ DEPENDENCIES
   puma (~> 5.0)
   rails (~> 7.0.4)
   rails_autolink
+  rspec-core!
+  rspec-expectations!
+  rspec-mocks!
+  rspec-rails (~> 6.1.0)
+  rspec-support!
   rubocop-fjord
   rubocop-rails
   selenium-webdriver
