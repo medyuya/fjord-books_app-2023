@@ -356,6 +356,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activesupport
   bootsnap
   capybara
   carrierwave

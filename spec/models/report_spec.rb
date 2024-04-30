@@ -19,4 +19,15 @@ RSpec.describe Report, type: :model do
       end
     end
   end
+
+  describe '#created_on' do
+    let!(:user) { create(:user, name: 'ケン') }
+
+    it 'returns the date when the report was created' do
+      travel_to Time.zone.local(2023, 8, 30) do
+        report = FactoryBot.create(:report, user: user)
+        expect(report.created_on).to eq Date.new(2023, 8, 30)
+      end
+    end
+  end
 end
