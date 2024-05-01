@@ -50,7 +50,7 @@ RSpec.describe 'Report CRUD', type: :system do
 
   describe 'Create Report' do
     context 'when a new report with proper inputs is created' do
-      it 'creates a new post successfully' do
+      it 'creates a new report successfully' do
         visit new_report_path
 
         fill_in 'タイトル', with: 'チェリー本を読んだ'
@@ -64,7 +64,7 @@ RSpec.describe 'Report CRUD', type: :system do
     end
 
     context 'when a new report with empty inputs is created' do
-      it 'shows validation errors and does not create a post' do
+      it 'shows validation errors and does not create a report' do
         visit new_report_path
 
         fill_in 'タイトル', with: ''
@@ -78,8 +78,32 @@ RSpec.describe 'Report CRUD', type: :system do
   end
 
   describe 'Update Report' do
-    context 'when name is present' do
-      it '' do
+    let!(:report) { create(:report, user: @user, title: 'キウイ本を読んだ', content: 'ちょうど良い難易度でした') }
+
+    context 'when a new report with proper inputs is updated' do
+      it 'updates a new report successfully' do
+        visit edit_report_path(report)
+
+        fill_in 'タイトル', with: 'ブルーベリー本を読んだ'
+        fill_in '内容', with: '難しかった'
+        click_on '更新する'
+
+        expect(page).to have_content('日報が更新されました。')
+        expect(page).to have_content('ブルーベリー本を読んだ')
+        expect(page).to have_content('難しかった')
+      end
+    end
+
+    context 'when a new report with empty inputs is updated' do
+      it 'shows validation errors and does not update a report' do
+        visit edit_report_path(report)
+
+        fill_in 'タイトル', with: ''
+        fill_in '内容', with: ''
+        click_on '更新する'
+
+        expect(page).to have_content('タイトルを入力してください')
+        expect(page).to have_content('内容を入力してください')
       end
     end
   end
