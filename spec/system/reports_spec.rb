@@ -109,6 +109,18 @@ RSpec.describe 'Report CRUD', type: :system do
   end
 
   describe 'Delete Report' do
+    let!(:report) { create(:report, user: @user, title: 'キウイ本を読んだ', content: 'ちょうど良い難易度でした') }
 
+    it 'delete a report' do
+      visit reports_path
+
+      expect(page).to have_content('キウイ本を読んだ')
+
+      visit report_path(report)
+      click_on 'この日報を削除'
+
+      expect(page).to have_content('日報が削除されました。')
+      expect(page).to have_no_content('キウイ本を読んだ')
+    end
   end
 end
