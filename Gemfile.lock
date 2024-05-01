@@ -99,9 +99,10 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
-    addressable (2.8.1)
+    addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
+    base64 (0.2.0)
     bcrypt (3.1.18)
     better_html (2.0.1)
       actionview (>= 6.0)
@@ -114,11 +115,11 @@ GEM
     bootsnap (1.16.0)
       msgpack (~> 1.2)
     builder (3.2.4)
-    capybara (3.38.0)
+    capybara (3.40.0)
       addressable
       matrix
       mini_mime (>= 0.1.3)
-      nokogiri (~> 1.8)
+      nokogiri (~> 1.11)
       rack (>= 1.6.0)
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
@@ -131,6 +132,7 @@ GEM
       marcel (~> 1.0.0)
       mini_mime (>= 0.1.3)
       ssrf_filter (~> 1.0)
+    coderay (1.1.3)
     concurrent-ruby (1.2.0)
     crass (1.0.6)
     date (3.3.3)
@@ -210,8 +212,8 @@ GEM
     matrix (0.4.2)
     method_source (1.0.0)
     mini_magick (4.12.0)
-    mini_mime (1.1.2)
-    mini_portile2 (2.8.1)
+    mini_mime (1.1.5)
+    mini_portile2 (2.8.6)
     minitest (5.17.0)
     msgpack (1.6.0)
     net-imap (0.3.4)
@@ -224,19 +226,24 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.8)
-    nokogiri (1.14.2)
-      mini_portile2 (~> 2.8.0)
+    nokogiri (1.16.4)
+      mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     parallel (1.22.1)
     parser (3.2.1.0)
       ast (~> 2.4.1)
-    public_suffix (5.0.1)
+    pry (0.14.2)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
+    pry-rails (0.3.9)
+      pry (>= 0.10.4)
+    public_suffix (5.0.5)
     puma (5.6.5)
       nio4r (~> 2.0)
-    racc (1.6.2)
-    rack (2.2.6.2)
-    rack-test (2.0.2)
+    racc (1.7.3)
+    rack (2.2.9)
+    rack-test (2.1.0)
       rack (>= 1.3)
     rails (7.0.4.2)
       actioncable (= 7.0.4.2)
@@ -268,11 +275,11 @@ GEM
       zeitwerk (~> 2.5)
     rainbow (3.1.1)
     rake (13.0.6)
-    regexp_parser (2.7.0)
+    regexp_parser (2.9.0)
     responders (3.1.0)
       actionpack (>= 5.2)
       railties (>= 5.2)
-    rexml (3.2.5)
+    rexml (3.2.6)
     rspec-rails (6.1.2)
       actionpack (>= 6.1)
       activesupport (>= 6.1)
@@ -307,7 +314,8 @@ GEM
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     rubyzip (2.3.2)
-    selenium-webdriver (4.8.0)
+    selenium-webdriver (4.20.1)
+      base64 (~> 0.2)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
@@ -340,11 +348,7 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    webdrivers (5.2.0)
-      nokogiri (~> 1.6)
-      rubyzip (>= 1.3.0)
-      selenium-webdriver (~> 4.0)
-    websocket (1.2.9)
+    websocket (1.2.10)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -371,6 +375,7 @@ DEPENDENCIES
   jbuilder
   kaminari
   letter_opener_web
+  pry-rails
   puma (~> 5.0)
   rails (~> 7.0.4)
   rails_autolink
@@ -388,7 +393,6 @@ DEPENDENCIES
   turbo-rails
   tzinfo-data
   web-console
-  webdrivers
 
 RUBY VERSION
    ruby 3.2.1p31
