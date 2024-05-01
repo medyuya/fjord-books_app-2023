@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Report, type: :model do
+  let!(:user) { create(:user) }
+
   describe '#editable?' do
-    let!(:user) { create(:user, name: 'ケン') }
     let!(:report) { create(:report, user: user) }
 
     context 'when the user is the owner of the report' do
@@ -12,7 +13,7 @@ RSpec.describe Report, type: :model do
     end
 
     context 'when the user is not the owner of the report' do
-      let!(:other_user) { create(:user, name: 'ジン') }
+      let!(:other_user) { create(:user) }
 
       it 'returns the false' do
         expect(report.editable?(other_user)).to eq false
@@ -21,8 +22,6 @@ RSpec.describe Report, type: :model do
   end
 
   describe '#created_on' do
-    let!(:user) { create(:user, name: 'ケン') }
-
     it 'returns the date when the report was created' do
       travel_to Time.zone.local(2023, 8, 30) do
         report = FactoryBot.create(:report, user: user)
