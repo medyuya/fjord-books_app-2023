@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe '#name_or_email' do
-    context 'when name is present' do
+    context 'when the name is present' do
       let!(:user) { create(:user, name: 'ケン') }
 
       it 'returns the name' do
@@ -10,7 +10,7 @@ RSpec.describe User, type: :model do
       end
     end
 
-    context 'when name is not present' do
+    context 'when the name is not present' do
       let!(:user) { create(:user, email: 'ken@example.com', name: '') }
 
       it 'returns the email' do
