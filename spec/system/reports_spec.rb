@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Report CRUD', type: :system do
+RSpec.describe 'Reports', type: :system do
   before do
     @user = FactoryBot.create(:user, name: 'ケン')
     login_as(@user)
@@ -49,8 +49,8 @@ RSpec.describe 'Report CRUD', type: :system do
   end
 
   describe 'Create Report' do
-    context 'when a new report with proper inputs is created' do
-      it 'creates a new report successfully' do
+    context 'with valid inputs' do
+      it 'creates the new report successfully' do
         visit new_report_path
 
         fill_in 'タイトル', with: 'チェリー本を読んだ'
@@ -63,8 +63,8 @@ RSpec.describe 'Report CRUD', type: :system do
       end
     end
 
-    context 'when a new report with empty inputs is created' do
-      it 'shows validation errors and does not create a report' do
+    context 'with invalid inputs' do
+      it 'shows validation errors and prevents report creation' do
         visit new_report_path
 
         fill_in 'タイトル', with: ''
@@ -80,8 +80,8 @@ RSpec.describe 'Report CRUD', type: :system do
   describe 'Update Report' do
     let!(:report) { create(:report, user: @user, title: 'キウイ本を読んだ', content: 'ちょうど良い難易度でした') }
 
-    context 'when a new report with proper inputs is updated' do
-      it 'updates a new report successfully' do
+    context 'with valid changes' do
+      it 'updates the report successfully' do
         visit edit_report_path(report)
 
         fill_in 'タイトル', with: 'ブルーベリー本を読んだ'
@@ -94,8 +94,8 @@ RSpec.describe 'Report CRUD', type: :system do
       end
     end
 
-    context 'when a new report with empty inputs is updated' do
-      it 'shows validation errors and does not update a report' do
+    context 'with invalid changes' do
+      it 'shows validation errors and prevents report update' do
         visit edit_report_path(report)
 
         fill_in 'タイトル', with: ''
@@ -111,7 +111,7 @@ RSpec.describe 'Report CRUD', type: :system do
   describe 'Delete Report' do
     let!(:report) { create(:report, user: @user, title: 'キウイ本を読んだ', content: 'ちょうど良い難易度でした') }
 
-    it 'delete a report' do
+    it 'deletes a report successfully' do
       visit reports_path
 
       expect(page).to have_content('キウイ本を読んだ')
