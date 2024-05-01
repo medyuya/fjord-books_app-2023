@@ -1,21 +1,20 @@
 require 'rails_helper'
 
-RSpec.describe 'Reports', type: :system do
+RSpec.describe 'Reports' do
+  let(:user) { create(:user, name: 'ケン') }
+
   before do
-    @user = FactoryBot.create(:user, name: 'ケン')
-    login_as(@user)
+    login_as(user)
   end
 
   describe 'Report Index' do
+    let!(:report) { create(:report, user: user, title: 'キウイ本を読んだ', content: 'ちょうど良い難易度でした', created_at: Time.zone.local(2023, 8, 30)) }
+
     it 'displays elements on report index page' do
-      travel_to Time.zone.local(2023, 8, 30) do
-        @report = FactoryBot.create(:report, user: @user, title: 'キウイ本を読んだ', content: 'ちょうど良い難易度でした')
-      end
-
       visit reports_path
-      expect(page).to have_content('日報の一覧')
 
-      within "div#report_#{@report.id}" do
+      expect(page).to have_content('日報の一覧')
+      within 'div#report_1' do
         expect(page).to have_content('キウイ本を読んだ')
         expect(page).to have_content('ちょうど良い難易度でした')
         expect(page).to have_link('ケン')
@@ -27,32 +26,31 @@ RSpec.describe 'Reports', type: :system do
   end
 
   describe 'Report Show' do
+    let!(:report) { create(:report, user: user, title: 'キウイ本を読んだ', content: 'ちょうど良い難易度でした', created_at: Time.zone.local(2023, 8, 30)) }
+
     it 'displays elements on report show page' do
-      travel_to Time.zone.local(2023, 8, 30) do
-        @report = FactoryBot.create(:report, user: @user, title: 'キウイ本を読んだ', content: 'ちょうど良い難易度でした')
-      end
+      visit report_path report
 
-      visit report_path(@report)
       expect(page).to have_content('日報の詳細')
-
-      within "div#report_#{@report.id}" do
+      within 'div#report_1' do
         expect(page).to have_content('キウイ本を読んだ')
         expect(page).to have_content('ちょうど良い難易度でした')
         expect(page).to have_link('ケン')
         expect(page).to have_content('2023/08/30')
       end
-
       expect(page).to have_link('この日報を編集')
       expect(page).to have_link('日報の一覧に戻る')
-      expect(page).to have_selector('button', text: 'この日報を削除')
+      expect(page).to have_button('この日報を削除')
     end
   end
 
   describe 'Create Report' do
+    before do
+      visit new_report_path
+    end
+
     context 'with valid inputs' do
       it 'creates the new report successfully' do
-        visit new_report_path
-
         fill_in 'タイトル', with: 'チェリー本を読んだ'
         fill_in '内容', with: '分かりやすく書かれていました。'
         click_on '登録する'
@@ -65,8 +63,6 @@ RSpec.describe 'Reports', type: :system do
 
     context 'with invalid inputs' do
       it 'shows validation errors and prevents report creation' do
-        visit new_report_path
-
         fill_in 'タイトル', with: ''
         fill_in '内容', with: ''
         click_on '登録する'
@@ -78,12 +74,14 @@ RSpec.describe 'Reports', type: :system do
   end
 
   describe 'Update Report' do
-    let!(:report) { create(:report, user: @user, title: 'キウイ本を読んだ', content: 'ちょうど良い難易度でした') }
+    let!(:report) { create(:report, user: user, title: 'キウイ本を読んだ', content: 'ちょうど良い難易度でした') }
+
+    before do
+      visit edit_report_path report
+    end
 
     context 'with valid changes' do
       it 'updates the report successfully' do
-        visit edit_report_path(report)
-
         fill_in 'タイトル', with: 'ブルーベリー本を読んだ'
         fill_in '内容', with: '難しかった'
         click_on '更新する'
@@ -96,8 +94,6 @@ RSpec.describe 'Reports', type: :system do
 
     context 'with invalid changes' do
       it 'shows validation errors and prevents report update' do
-        visit edit_report_path(report)
-
         fill_in 'タイトル', with: ''
         fill_in '内容', with: ''
         click_on '更新する'
@@ -109,14 +105,14 @@ RSpec.describe 'Reports', type: :system do
   end
 
   describe 'Delete Report' do
-    let!(:report) { create(:report, user: @user, title: 'キウイ本を読んだ', content: 'ちょうど良い難易度でした') }
+    let!(:report) { create(:report, user: user, title: 'キウイ本を読んだ', content: 'ちょうど良い難易度でした') }
 
     it 'deletes a report successfully' do
       visit reports_path
 
       expect(page).to have_content('キウイ本を読んだ')
+      visit report_path report
 
-      visit report_path(report)
       click_on 'この日報を削除'
 
       expect(page).to have_content('日報が削除されました。')
