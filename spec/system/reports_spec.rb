@@ -26,6 +26,28 @@ RSpec.describe 'Report CRUD', type: :system do
     end
   end
 
+  describe 'Report Show' do
+    it 'displays elements on report show page' do
+      travel_to Time.zone.local(2023, 8, 30) do
+        @report = FactoryBot.create(:report, user: @user, title: 'キウイ本を読んだ', content: 'ちょうど良い難易度でした')
+      end
+
+      visit report_path(@report)
+      expect(page).to have_content('日報の詳細')
+
+      within "div#report_#{@report.id}" do
+        expect(page).to have_content('キウイ本を読んだ')
+        expect(page).to have_content('ちょうど良い難易度でした')
+        expect(page).to have_link('ケン')
+        expect(page).to have_content('2023/08/30')
+      end
+
+      expect(page).to have_link('この日報を編集')
+      expect(page).to have_link('日報の一覧に戻る')
+      expect(page).to have_selector('button', text: 'この日報を削除')
+    end
+  end
+
   describe 'Update Report' do
     context 'when name is present' do
       it '' do
