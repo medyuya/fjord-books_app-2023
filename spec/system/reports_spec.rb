@@ -48,6 +48,35 @@ RSpec.describe 'Report CRUD', type: :system do
     end
   end
 
+  describe 'Create Report' do
+    context 'when a new report with proper inputs is created' do
+      it 'creates a new post successfully' do
+        visit new_report_path
+
+        fill_in 'タイトル', with: 'チェリー本を読んだ'
+        fill_in '内容', with: '分かりやすく書かれていました。'
+        click_on '登録する'
+
+        expect(page).to have_content('日報が作成されました。')
+        expect(page).to have_content('チェリー本を読んだ')
+        expect(page).to have_content('分かりやすく書かれていました。')
+      end
+    end
+
+    context 'when a new report with empty inputs is created' do
+      it 'shows validation errors and does not create a post' do
+        visit new_report_path
+
+        fill_in 'タイトル', with: ''
+        fill_in '内容', with: ''
+        click_on '登録する'
+
+        expect(page).to have_content('タイトルを入力してください')
+        expect(page).to have_content('内容を入力してください')
+      end
+    end
+  end
+
   describe 'Update Report' do
     context 'when name is present' do
       it '' do
