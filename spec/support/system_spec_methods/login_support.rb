@@ -7,7 +7,6 @@ module LoginSupport
     fill_in 'パスワード', with: user.password
     click_on 'ログイン'
 
-    # expect(current_path).to eq books_path
     expect(page).to have_text 'ログインしました。'
   end
 end
