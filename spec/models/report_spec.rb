@@ -7,7 +7,7 @@ RSpec.describe Report, type: :model do
     let!(:report) { create(:report, user: user) }
 
     context 'when the user is the owner of the report' do
-      it 'returns the true' do
+      it 'is editable' do
         expect(report.editable?(user)).to eq true
       end
     end
@@ -15,7 +15,7 @@ RSpec.describe Report, type: :model do
     context 'when the user is not the owner of the report' do
       let!(:other_user) { create(:user) }
 
-      it 'returns the false' do
+      it 'is not editable' do
         expect(report.editable?(other_user)).to eq false
       end
     end
