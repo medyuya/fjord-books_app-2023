@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+RSpec.describe User do
   describe '#name_or_email' do
     context 'when the name is present' do
       let!(:user) { create(:user, name: 'ケン') }
