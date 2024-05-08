@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Reports' do
-  let(:user) { create(:user, name: 'ケン') }
+  let!(:user) { create(:user, name: 'ケン') }
 
   before do
     login_as(user)
