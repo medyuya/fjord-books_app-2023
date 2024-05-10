@@ -23,7 +23,7 @@ RSpec.describe Report do
 
   describe '#created_on' do
     it 'returns the date when the report was created' do
-      travel_to Time.zone.local(2023, 8, 30, 01, 04, 44) do
+      travel_to "2023-08-30 01:04:44".in_time_zone do
         report = FactoryBot.create(:report, user: user)
         expect(report.created_on).to eq Date.new(2023, 8, 30)
       end
