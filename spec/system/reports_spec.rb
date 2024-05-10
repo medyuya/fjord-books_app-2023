@@ -14,7 +14,7 @@ RSpec.describe 'Reports' do
       visit reports_path
 
       expect(page).to have_content('日報の一覧')
-      within 'div#report_1' do
+      within '#report_1' do
         expect(page).to have_content('キウイ本を読んだ')
         expect(page).to have_content('ちょうど良い難易度でした')
         expect(page).to have_link('ケン')
@@ -32,7 +32,7 @@ RSpec.describe 'Reports' do
       visit report_path report
 
       expect(page).to have_content('日報の詳細')
-      within 'div#report_1' do
+      within '#report_1' do
         expect(page).to have_content('キウイ本を読んだ')
         expect(page).to have_content('ちょうど良い難易度でした')
         expect(page).to have_link('ケン')
