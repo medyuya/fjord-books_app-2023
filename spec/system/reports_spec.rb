@@ -111,7 +111,7 @@ RSpec.describe 'Reports' do
       visit reports_path
 
       expect(page).to have_content('キウイ本を読んだ')
-      visit report_path report
+      click_link 'この日報を表示'
 
       click_on 'この日報を削除'
 
