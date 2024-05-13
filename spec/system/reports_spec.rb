@@ -4,7 +4,7 @@ RSpec.describe 'Reports' do
   let!(:user) { create(:user, name: 'ケン') }
 
   before do
-    login_as(user)
+    login_as(user, user.password)
   end
 
   describe 'Report Index' do
