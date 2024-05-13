@@ -45,12 +45,10 @@ RSpec.describe 'Reports' do
   end
 
   describe 'Create Report' do
-    before do
-      visit new_report_path
-    end
-
     context 'with valid inputs' do
       it 'creates the new report successfully' do
+        visit new_report_path
+
         fill_in 'タイトル', with: 'チェリー本を読んだ'
         fill_in '内容', with: '分かりやすく書かれていました。'
         click_on '登録する'
@@ -63,6 +61,8 @@ RSpec.describe 'Reports' do
 
     context 'with invalid inputs' do
       it 'shows validation errors and prevents report creation' do
+        visit new_report_path
+
         fill_in 'タイトル', with: ''
         fill_in '内容', with: ''
         click_on '登録する'
@@ -76,12 +76,10 @@ RSpec.describe 'Reports' do
   describe 'Update Report' do
     let!(:report) { create(:report, user: user, title: 'キウイ本を読んだ', content: 'ちょうど良い難易度でした') }
 
-    before do
-      visit edit_report_path report
-    end
-
     context 'with valid changes' do
       it 'updates the report successfully' do
+        visit edit_report_path report
+
         fill_in 'タイトル', with: 'ブルーベリー本を読んだ'
         fill_in '内容', with: '難しかった'
         click_on '更新する'
@@ -94,6 +92,8 @@ RSpec.describe 'Reports' do
 
     context 'with invalid changes' do
       it 'shows validation errors and prevents report update' do
+        visit edit_report_path report
+
         fill_in 'タイトル', with: ''
         fill_in '内容', with: ''
         click_on '更新する'
